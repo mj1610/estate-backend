@@ -15,12 +15,19 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+//Testing route
+app.get("/ping", (req, res) => {
+  console.log("🔔 /ping route hit");
+  res.send("pong");
+});
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
-app.listen(port, () => {
+// 0.0.0.0 added for Docker compatibility
+app.listen(port, "0.0.0.0", () => {
   console.log("Server is running! at port " + port);
 });
